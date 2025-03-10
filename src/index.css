@@ -1,29 +1,30 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 33% 98%;
+    --foreground: 222 47% 11.2%;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222.2 47.4% 11.2%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221 83% 53%; /* Solana blue */
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
+    --secondary: 220 22% 96%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 273 80% 63%; /* Purple accent */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -32,70 +33,139 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0.75rem;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
   }
+
+  .blurred-card {
+    @apply bg-white/70 backdrop-blur-lg;
+  }
+
+  .glass-card {
+    @apply bg-white/40 backdrop-blur-md;
+    box-shadow: 0 4px 24px -12px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-dark {
+    @apply bg-black/10 backdrop-blur-md;
+    box-shadow: 0 4px 24px -12px rgba(0, 0, 0, 0.3);
+  }
+
+  .floating-shape {
+    animation: float 6s infinite ease-in-out;
+  }
+
+  .fancy-border {
+    @apply relative;
+  }
+
+  .fancy-border::after {
+    content: '';
+    @apply absolute inset-0 border border-white/30 rounded-xl -z-10;
+    transform: translate(6px, 6px);
+  }
+
+  .bg-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.6) 50%, 
+    rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.hero-shape-1 {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4c6ef5 0%, #15aabf 100%);
+  opacity: 0.3;
+  filter: blur(40px);
+  top: -80px;
+  right: 15%;
+  z-index: -1;
+}
+
+.hero-shape-2 {
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ae3ec9 0%, #2b68ff 100%);
+  opacity: 0.2;
+  filter: blur(60px);
+  bottom: -150px;
+  left: 10%;
+  z-index: -1;
+}
+
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.wallet-adapter-button {
+  @apply flex items-center justify-center px-6 py-3 rounded-xl font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 whitespace-nowrap;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.wallet-adapter-button-trigger {
+  @apply bg-primary text-primary-foreground;
+}
+
+.wallet-adapter-dropdown {
+  @apply inline-block;
+}
+
+/* Image loading animation */
+.img-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.img-loading::after {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  transform: translateX(-100%);
+  animation: shimmer 1.5s infinite;
+}
+
+/* Hide Scrollbar but allow scrolling */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari, Opera */
 }
