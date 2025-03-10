@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Connection, clusterApiUrl, PublicKey } from "@solana/web3.js";
 import { Metaplex, walletAdapterIdentity } from "@metaplex-foundation/js";
-import { toast } from "@/components/ui/sonner";
+import { toast } from "sonner";
 import MintSection from '@/components/mint-section';
 import NFTCollection from '@/components/nft-collection';
 import Header from '@/components/header';
