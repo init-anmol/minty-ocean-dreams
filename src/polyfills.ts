@@ -7,6 +7,6 @@ if (typeof window !== 'undefined') {
   // Buffer polyfill
   window.Buffer = window.Buffer || require('buffer').Buffer;
   
-  // Process polyfill
-  window.process = window.process || { env: {} };
+  // Process polyfill - use type assertion to avoid type errors
+  window.process = window.process || { env: {} } as any;
 }
